@@ -117,7 +117,18 @@ class MyHomePage extends StatelessWidget {
                 var counter = context.read<Counter>();
                 counter.increment();
               },
-              child: const Text('Increase Age'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+                minimumSize: const Size(150, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: const Text(
+                'Increase Age',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
@@ -127,7 +138,18 @@ class MyHomePage extends StatelessWidget {
                   counter.decrement(); // Or counter.decrement();
                 }
               },
-              child: const Text('Reduce Age'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+                minimumSize: const Size(150, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: const Text(
+                'Reduce Age',
+                style: TextStyle(color: Colors.white),
+              ),
             )
           ],
         ),
