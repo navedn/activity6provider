@@ -5,7 +5,19 @@ import 'package:provider/provider.dart';
 import 'package:window_size/window_size.dart';
 
 void main() {
+  const double min_height = 720;
+  const double max_height = 1080;
+  const double min_width = 720;
+  const double max_width = 1080;
   setupWindow();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    setWindowTitle('My App');
+    setWindowMaxSize(const Size(max_width, max_height));
+    setWindowMinSize(const Size(min_width, min_height));
+  }
+
   runApp(
 // Provide the model to all widgets within the app. We're using
 // ChangeNotifierProvider because that's a simple way to rebuild
@@ -79,7 +91,11 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Age Counter'),
+        title: const Text(
+          'Age Counter',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.blue,
       ),
       body: Center(
         child: Column(
@@ -98,16 +114,18 @@ class MyHomePage extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                var counter = context.read<Counter>(); // Correct usage
-                counter.increment(); // Or counter.decrement();
+                var counter = context.read<Counter>();
+                counter.increment();
               },
               child: const Text('Increase Age'),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                var counter = context.read<Counter>(); // Correct usage
-                counter.decrement(); // Or counter.decrement();
+                var counter = context.read<Counter>();
+                if (counter.value != 0) {
+                  counter.decrement(); // Or counter.decrement();
+                }
               },
               child: const Text('Reduce Age'),
             )
